@@ -9,7 +9,7 @@ using MyShop.Core.Models;
 
 namespace MyShop.DataAccess.InMemory
 {
-    class ProductRepository
+    public class ProductRepository
     {
         ObjectCache cache = MemoryCache.Default;
         List<Product> products = new List<Product>();
@@ -48,7 +48,7 @@ namespace MyShop.DataAccess.InMemory
             Product productFound = products.Find(p => p.Id == Id1);
             if (productFound != null)
             {
-                return Product;
+                return productFound;
             }
             else
             {
