@@ -77,7 +77,7 @@ namespace MyShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product,string id1,HttpPostedFileBase file)
+        public ActionResult Edit(Product product,string id1)
         {
             Product productFound = context.Find(id1);
             if (productFound == null)
@@ -93,13 +93,7 @@ namespace MyShop.WebUI.Controllers
                 }
                 else
                 {
-                    if (file != null)
-                    {
-                        productFound.Image = id1 + Path.GetExtension(file.FileName);
-
-                        file.SaveAs(Server.MapPath("//Content//ProductImages//") + productFound.Image);
-                    }
-                    
+                   
                     productFound.Name = product.Name;
                     productFound.Description = product.Description;
                     productFound.category = product.category;
