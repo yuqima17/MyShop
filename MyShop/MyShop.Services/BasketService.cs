@@ -15,7 +15,7 @@ namespace MyShop.Services
         IRepository<Product> productContext;
         IRepository<Basket> basketContext;
         public const string BasketSessionName = "eCommerceBasket";
-        BasketService(IRepository<Product> productContext1, IRepository<Basket> basketContext1)
+        public BasketService(IRepository<Product> productContext1, IRepository<Basket> basketContext1)
         {
             this.productContext = productContext1;
             this.basketContext = basketContext1;
@@ -65,7 +65,16 @@ namespace MyShop.Services
         public void AddToBasket(HttpContextBase httpContext,string productId)
         {
             Basket basket = getBasket(httpContext, true);
-            BasketItem item = basket.BasketItems.FirstOrDefault(i => i.ProductId == productId);
+            BasketItem item;
+            if (basket.BasketItems != null){
+                item= basket.BasketItems.FirstOrDefault(i => i.ProductId == productId);
+            }
+            else
+            {
+                item = null;
+            }
+
+            
             if (item == null)
             {
                 item = new BasketItem();
